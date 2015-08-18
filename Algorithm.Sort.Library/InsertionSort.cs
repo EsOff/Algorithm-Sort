@@ -11,13 +11,17 @@
                 if (!Common.IsInOrder(array[i - 1], array[i], sortType))
                 {
                     T key = array[i];
-                    int j = i;
-                    // to find key's correct position in array.
+                    array[i] = array[i - 1];
+
+                    // search key's right position.
+                    int j = i - 1;
                     while (j > 0 && !Common.IsInOrder(array[j - 1], key, sortType))
                     {
                         array[j] = array[j - 1]; // move current value backward in turn.
                         j--;
                     }
+
+                    // insert key.
                     array[j] = key;
                 }
             }
