@@ -22,7 +22,7 @@
                 }
             }
             // The Sub-Arrays size is large than 2
-            else
+            else if (n > 2)
             {
                 int m = n / 2;
 

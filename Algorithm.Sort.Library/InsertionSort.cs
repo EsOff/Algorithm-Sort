@@ -13,7 +13,7 @@
                     T key = array[i];
                     array[i] = array[i - 1];
 
-                    // search key's right position.
+                    // search key's right location.
                     int j = i - 1;
                     while (j > 0 && !Common.IsInOrder(array[j - 1], key, sortType))
                     {
