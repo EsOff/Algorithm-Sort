@@ -41,9 +41,7 @@
 
                 if (left < right) // swap left and right elements to make sure left <= pivot <= right in asceding order.
                 {
-                    T temp = array[right];
-                    array[right] = array[left];
-                    array[left] = temp;
+                    Common.Swap(ref array[left], ref array[right]);
                 }
                 else // left >= right
                 {

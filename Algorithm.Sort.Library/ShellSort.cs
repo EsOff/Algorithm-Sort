@@ -26,8 +26,9 @@
         }
 
         /// <summary>
-        /// Steps = Math.Pow(2, k) - 1.
-        /// 0, 1, 3, 7, 15, 31 ...
+        /// Steps = 2^k - 1.
+        /// 0, 1, 3, 7, 15, 31, 63 ...
+        /// Performance: O(N^{3/2})
         /// </summary>
         private static int[] CalSteps(int n)
         {

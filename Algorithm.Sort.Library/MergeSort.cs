@@ -16,9 +16,7 @@
             {
                 if (!Common.IsInOrder(X[0], X[1], sortType))
                 {
-                    T tempT = X[0];
-                    X[0] = X[1];
-                    X[1] = tempT;
+                    Common.Swap(ref X[0], ref X[1]);
                 }
             }
             // The Sub-Arrays size is large than 2

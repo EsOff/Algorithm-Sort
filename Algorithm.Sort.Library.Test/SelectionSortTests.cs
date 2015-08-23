@@ -2,20 +2,20 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass]
-    public class InsertionSortTests
+    [TestClass()]
+    public class SelectionSortTests
     {
         [TestMethod]
-        public void InsertionSortByAscendingTest()
+        public void SelectionSortByAscendingTest()
         {
-            InsertionSort.Sort(Common.Array, SortType.Ascending);
+            SelectionSort.Sort(Common.Array, SortType.Ascending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByAscendingArray));
         }
 
         [TestMethod]
-        public void InsertionSortByDescendingTest()
+        public void SelectionSortByDescendingTest()
         {
-            InsertionSort.Sort(Common.Array, SortType.Descending);
+            SelectionSort.Sort(Common.Array, SortType.Descending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByDescendingArray));
         }
     }

@@ -1,22 +1,35 @@
 # Algorithm-Sort
 
-## All source code in here are related to very basic algorithms. Intents to create this repository are:
+## Intents to create this repository:
 1. Learn how to use Git and GitHub.
 2. Manage personal study code in cloud.
-3. Learn from each other.
+3. Learn and share with each other.
 
-## Problem Sorting Solutions.
-1. Insertion Sort
+## Problem sorting solutions.
+
+Definition In-Place: Sorting algorithm do not require any extra space is a in-place algorithm, otherwise, it's not a in-place algorithm.
+
+Definition Stability: A sort is stable if elements with the same key retain their original order after sorting. Any sorting algorithm can be made stable by the addition of extra data containing the original order of the data. This would stop the sort from being in-place. 
+
+### Basic algorithms. 
+
+1. Bubble Sort: stable and in-place, it's only practical if the input is ususally in sort order but may occasionally have some out-of-order elements nearly in position.
   1) Average case - O(n2)
-  2) Worst case   - O(n2)
-2. Binary Insertion Sort
+2. Insertion Sort: stable and in-place, efficient for small data sets.
   1) Average case - O(n2)
-3. Merge Sort
-  1) Best case    - O(n) or O(n log n)
-  2) Average case - O(n log n)
-  3) Worst case   - O(n log n)
-4. Quick Sort
+3. Binary Insertion Sort: an insertion sort variant.
+  1) Average case - O(n2)
+4. Selection Sort: not stable but in-place.
+  1) Average case - O(n2)
+5. Merge Sort: stable but not in-place.
   1) Average case - O(n log n)
-  2) Worst case   - O(n2)
-5. Shell Sort
-  1) Average case - O(N^{3/2}) Frank & Lazarus, 1960[6]
+6. Quick Sort: not stable but in-place.
+  1) Average case - O(n log n)
+7. Shell Sort: stable and in-place.
+  1) Average case - depends on steps, for 2^k -1, O(N^{3/2})
+8. Heap Sort: not stable but in-place, an improved selection sort.
+  1) Average case - O(n log n)
+
+### Advanced algorithms.
+1. In-Place Stable Merge Sort: merge sort with a smart in place merge that 'rotates' the sub arrays.
+  1) Average case - O(n log n)

@@ -6,14 +6,14 @@
     public class BinaryInsertionSortTests
     {
         [TestMethod]
-        public void SortByAscending()
+        public void BinaryInsertionSortByAscendingTest()
         {
             BinaryInsertionSort.Sort(Common.Array, SortType.Ascending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByAscendingArray));
         }
 
         [TestMethod]
-        public void SortByDescending()
+        public void BinaryInsertionSortByDescendingTest()
         {
             BinaryInsertionSort.Sort(Common.Array, SortType.Descending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByDescendingArray));

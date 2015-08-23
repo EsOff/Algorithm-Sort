@@ -2,20 +2,20 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass]
-    public class InsertionSortTests
+    [TestClass()]
+    public class InPlaceStableMergeSortTests
     {
         [TestMethod]
-        public void InsertionSortByAscendingTest()
+        public void InPlaceStableMergeSortByAscedingTest()
         {
-            InsertionSort.Sort(Common.Array, SortType.Ascending);
+            InPlaceStableMergeSort.Sort(Common.Array, SortType.Ascending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByAscendingArray));
         }
 
         [TestMethod]
-        public void InsertionSortByDescendingTest()
+        public void InPlaceStableMergeSortByDescedingTest()
         {
-            InsertionSort.Sort(Common.Array, SortType.Descending);
+            InPlaceStableMergeSort.Sort(Common.Array, SortType.Descending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByDescendingArray));
         }
     }

@@ -6,14 +6,14 @@
     public class ShellSortTests
     {
         [TestMethod]
-        public void SortByAscending()
+        public void ShellSortByAscendingTest()
         {
             ShellSort.Sort(Common.Array, SortType.Ascending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByAscendingArray));
         }
 
         [TestMethod]
-        public void SortByDescending()
+        public void ShellSortByDescendingTest()
         {
             ShellSort.Sort(Common.Array, SortType.Descending);
             Assert.IsTrue(Common.IsSame(Common.Array, Common.SortedByDescendingArray));
