@@ -16,10 +16,67 @@
                 int middle = (from + to) / 2;
                 Sort(array, sortType, from, middle);
                 Sort(array, sortType, middle + 1, to);
-                Merge(array, sortType, from, middle, to);
+                Merge(array, sortType, from, middle, to, middle - from + 1, to - middle);
             }
         }
 
+        /// <summary>
+        /// Sophisticated merge method
+        /// </summary>
+        private static void Merge<T>(T[] array, SortType sortType, int from, int middle, int to, int topHalfLength, int bottomeHalfLength) where T : IComparable
+        {
+            if (from <= middle && middle <= to)
+            {
+                int n = topHalfLength + bottomeHalfLength;
+                if (n == 2)
+                {
+                    if (!Common.IsInOrder(array[from], array[to], sortType))
+                    {
+                        Common.Swap(ref array[from], ref array[to]);
+                    }
+                }
+                else if (n > 2)
+                {
+                    int binaryInTopHalf = from + topHalfLength / 2;
+                    int binaryInBottomHalf = RotateIndex(array, sortType, middle, to, array[binaryInTopHalf]);
+                    if (binaryInBottomHalf > middle)
+                    {
+                        ReversalBlockSwap(array, binaryInTopHalf, middle, binaryInBottomHalf);
+                        int movedToTopHalfLength = binaryInBottomHalf - middle;
+                        int movedToBottomHalfLength = middle - binaryInTopHalf + 1;
+                        Merge(array, sortType, from, binaryInTopHalf - 1, binaryInTopHalf + movedToTopHalfLength - 1, topHalfLength - movedToBottomHalfLength, movedToTopHalfLength);
+                        Merge(array, sortType, binaryInBottomHalf - movedToBottomHalfLength + 1, binaryInBottomHalf, to, movedToBottomHalfLength, bottomeHalfLength - movedToTopHalfLength);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Binary search index of the last greater/smaller element than value from sorted array [from...to]
+        /// </summary>
+        private static int RotateIndex<T>(T[] array, SortType sortType, int from, int to, T value) where T : IComparable
+        {
+            if (!Common.IsInOrder(value, array[to], sortType))
+            {
+                return to;
+            }
+            if (from < to)
+            {
+                int length = to - from + 1;
+                while (length > 0)
+                {
+                    int middle = from + length / 2;
+                    if (!Common.IsInOrder(value, array[middle], sortType))
+                    {
+                        from = middle;
+                    }
+                    length = length / 2;
+                }
+            }
+            return from;
+        }
+
+        #region Naive merge method
         private static void Merge<T>(T[] array, SortType sortType, int from, int middle, int to) where T : IComparable
         {
             int i = from, j = middle + 1;
@@ -40,6 +97,7 @@
                 ++i;
             }
         }
+        #endregion
 
         #region Reversal block swaping
         private static void Reverse<T>(T[] array, int from, int to)
@@ -86,27 +144,30 @@
             return m;
         }
 
+        /// <summary>
+        /// TODO: need to update it to adapt non-zero based block swap.
+        /// </summary>
         private static void JugglingBlockSwap<T>(T[] array, int from, int middle, int to)
         {
             int u = middle - from + 1;
             int v = to - middle;
-
             if (u <= 0 || v <= 0)
             {
                 return;
             }
-            int rotdist = middle - from + 1;
-            int n = to - from + 1;
-            int gcd_rotdist_n = GCD(rotdist, n);
 
-            for (int i = 0; i < gcd_rotdist_n; i++)
+            int rotationDistance = u;
+            int n = to - from + 1;
+            int gcd = GCD(rotationDistance, n);
+
+            for (int i = from; i < from + gcd; i++)
             {
                 // move i-th value of block
                 T temp = array[i];
                 int j = i;
                 while (true)
                 {
-                    int k = j + rotdist;
+                    int k = (j + rotationDistance);
                     if (k >= n)
                     {
                         k -= n;
@@ -124,9 +185,9 @@
         #endregion
 
         #region Gries and Mills block swapping
-        private static void SwapBlock<T>(T[] array, int from, int middle, int to)
+        private static void SwapBlock<T>(T[] array, int from, int to, int rotationLength)
         {
-            for (int i = 0; i < middle; i++)
+            for (int i = 0; i < rotationLength; i++)
             {
                 Common.Swap(ref array[from++], ref array[to++]);
             }
@@ -143,30 +204,30 @@
         /// </summary>
         private static void GriesMillsBlockSwap<T>(T[] array, int from, int middle, int to)
         {
-            int rotation_distance = middle - from + 1;
+            int rotationDistance = middle - from + 1;
             int n = to - from + 1;
-            if (rotation_distance == 0 || rotation_distance == n)
+            if (rotationDistance == 0 || rotationDistance == n)
             {
                 return;
             }
 
-            int p = rotation_distance;
-            int i = rotation_distance;
-            int j = n - i;
+            int p = rotationDistance;
+            int i = rotationDistance; // left  subarray A length
+            int j = n - i;            // right subarray B length
             while (i != j)
             {
                 if (i > j)
                 {
-                    SwapBlock(array, p - i, p, j);
+                    SwapBlock(array, from + p - i, from + p, j);
                     i -= j;
                 }
                 else
                 {
-                    SwapBlock(array, p - i, p + j - i, i);
+                    SwapBlock(array, from + p - i, from + p + j - i, i);
                     j -= i;
                 }
             }
-            SwapBlock(array, p - i, p, i);
+            SwapBlock(array, from + p - i, from + p, i);
         }
         #endregion
     }
