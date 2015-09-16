@@ -55,6 +55,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="HeapSortTests.cs" />
     <Compile Include="InPlaceStableMergeSortTests.cs" />
+    <Compile Include="InPlaceStableQuickSortTests.cs" />
     <Compile Include="InsertionSortTests.cs" />
     <Compile Include="MergeSortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

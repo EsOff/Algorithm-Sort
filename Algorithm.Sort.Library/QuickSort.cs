@@ -4,6 +4,8 @@
 
     public class QuickSort
     {
+        private static Random random = new Random();
+
         public static void Sort<T>(T[] array, SortType sortType) where T : IComparable
         {
             Sort(array, 0, array.Length - 1, sortType);
@@ -25,7 +27,7 @@
         ///</summary>
         private static int Partition<T>(T[] array, int left, int right, SortType sortType) where T : IComparable
         {
-            T pivot = array[(left + right) / 2]; // select any element in array as pivot.
+            T pivot = array[random.Next(left, right)]; // random select an element in array as pivot.
 
             while (true)
             {
